@@ -28,29 +28,35 @@
             box-sizing: border-box;
         }
 
-        /* DFDS Logo Alanı için Yer Tutucu (İsterseniz sayfa üstüne de <img src="..."> koyabilirsiniz) */
+        /* YENİ: Güncellenmiş Resmi DFDS Logo Alanı */
         #api::before {
             content: "";
             display: block;
-            width: 100px;
-            height: 40px;
+            width: 140px;
+            height: 50px;
             margin: 0 auto 30px auto;
-            background: url('https://wikimedia.org') no-repeat center;
+            background: url('https://images.ctfassets.net/z860498abl84/4GNnlmFFUTpX7wQehffgCx/f8e8403fd856449da810e914081f2cc0/Brand_logo__Deep_Blue_.svg') no-repeat center;
             background-size: contain;
         }
 
-        /* Başlık stili */
-        #api h2, #api .heading h2 {
-            font-size: 24px;
+        /* Görseldeki <div class="heading"> içindeki h1 (Sign in) */
+        #api .heading h1 {
+            font-size: 26px;
             font-weight: 700;
-            color: #00263e;
+            color: #00263e; /* DFDS Kurumsal Lacivert */
             margin-top: 0;
-            margin-bottom: 24px;
+            margin-bottom: 6px;
+            letter-spacing: -0.5px;
         }
 
-        /* Bilgilendirme Metinleri */
-        #api p, #api .intro p {
-            display: none; /* Sade kurumsal görünüm için Azure'un ekstra yazılarını gizliyoruz */
+        /* Görseldeki <div class="intro"> içindeki h2 (Sign in with your email address) */
+        #api .intro h2 {
+            font-size: 14px;
+            font-weight: 400;
+            color: #5f7585; /* Yumuşak Kurumsal Gri-Mavi */
+            margin-top: 0;
+            margin-bottom: 26px;
+            line-height: 1.4;
         }
 
         /* Form Elemanları Gruplaması */
@@ -89,11 +95,7 @@
             box-shadow: 0 0 0 2px rgba(75, 163, 227, 0.2);
         }
 
-        /* Şifre Göz İkonunun Kutunun İçinde Kalması İçin */
-        #api .password-label {
-            position: relative;
-        }
-
+        /* Şifre Göz İkonunun Konumu */
         #api .showHide {
             position: absolute;
             right: 12px;
@@ -114,7 +116,6 @@
             text-decoration: underline;
         }
 
-        /* Şifremi Unuttum Konumu */
         #api .forgotPassword {
             display: block;
             margin-top: 6px;
@@ -133,14 +134,13 @@
             font-weight: 700;
             cursor: pointer;
             transition: background-color 0.2s ease;
-            text-transform: capitalize;
         }
 
         #api button#next:hover, #api .buttons #next:hover {
             background-color: #d67d00;
         }
 
-        /* Azure'un varsayılan "OR" çizgisini gizliyoruz */
+        /* Diğer gereksiz B2C çizgilerini gizleme */
         #api .divider {
             display: none;
         }
@@ -153,7 +153,7 @@
 
         #api .create p {
             display: block;
-            font-size: 0; /* İçindeki ham metni temizlemek için */
+            font-size: 0;
         }
 
         #api .create a {
