@@ -28,35 +28,29 @@
             box-sizing: border-box;
         }
 
-        /* YENİ: Güncellenmiş Resmi DFDS Logo Alanı */
+        /* Resmi DFDS Logo Alanı */
         #api::before {
             content: "";
             display: block;
             width: 140px;
             height: 50px;
             margin: 0 auto 30px auto;
-            background: url('https://images.ctfassets.net/z860498abl84/4GNnlmFFUTpX7wQehffgCx/f8e8403fd856449da810e914081f2cc0/Brand_logo__Deep_Blue_.svg') no-repeat center;
+            background: url('https://ctfassets.net') no-repeat center;
             background-size: contain;
         }
 
-        /* Görseldeki <div class="heading"> içindeki h1 (Sign in) */
-        #api .heading h1 {
-            font-size: 26px;
-            font-weight: 700;
-            color: #00263e; /* DFDS Kurumsal Lacivert */
-            margin-top: 0;
-            margin-bottom: 6px;
-            letter-spacing: -0.5px;
-        }
-
-        /* Görseldeki <div class="intro"> içindeki h2 (Sign in with your email address) */
-        #api .intro h2 {
-            font-size: 14px;
-            font-weight: 400;
-            color: #5f7585; /* Yumuşak Kurumsal Gri-Mavi */
-            margin-top: 0;
-            margin-bottom: 26px;
-            line-height: 1.4;
+        /* KESİN ÇÖZÜM: İstenmeyen Başlıkları ve Boşlukları Tamamen Gizliyoruz */
+        #api .heading,
+        #api .heading h1,
+        #api .intro,
+        #api .intro h2,
+        #api .divider,
+        .companyName {
+            display: none !important;
+            visibility: hidden !important;
+            height: 0 !important;
+            margin: 0 !important;
+            padding: 0 !important;
         }
 
         /* Form Elemanları Gruplaması */
@@ -73,7 +67,7 @@
             margin-bottom: 6px;
         }
 
-        /* Input Giriş Kutuları (DFDS Tarzı) */
+        /* Input Giriş Kutuları */
         #api input[type="text"], 
         #api input[type="email"], 
         #api input[type="password"] {
@@ -82,7 +76,7 @@
             border: 1px solid #b1c4d1;
             border-radius: 2px;
             font-size: 14px;
-            background-color: #ecf2f9;
+            background-color: #ffffff;
             color: #00263e;
             box-sizing: border-box;
             transition: all 0.2s ease;
@@ -91,7 +85,6 @@
         #api input:focus {
             outline: none;
             border-color: #4ba3e3;
-            background-color: #ffffff;
             box-shadow: 0 0 0 2px rgba(75, 163, 227, 0.2);
         }
 
@@ -140,12 +133,7 @@
             background-color: #d67d00;
         }
 
-        /* Diğer gereksiz B2C çizgilerini gizleme */
-        #api .divider {
-            display: none;
-        }
-
-        /* Create Account (Yeni Hesap Oluştur) Buton Tasarımı */
+        /* Create Account / Sign up now Buton Tasarımı */
         #api .create {
             margin-top: 12px;
             text-align: center;
@@ -154,6 +142,8 @@
         #api .create p {
             display: block;
             font-size: 0;
+            margin: 0;
+            padding: 0;
         }
 
         #api .create a {
