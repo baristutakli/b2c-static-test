@@ -1,9 +1,158 @@
 <!DOCTYPE html>
-<html>
+<html lang="tr">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Product Brand Name</title>
+    <style>
+        /* Genel Sayfa Ayarları */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Azure B2C'nin enjekte ettiği ana kapsayıcıyı ortalıyoruz */
+        #api {
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            width: 100%;
+            max-width: 400px;
+            box-sizing: border-box;
+        }
+
+        /* Başlıklar */
+        #api h2, #api .heading h2 {
+            font-size: 24px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-top: 0;
+            margin-bottom: 8px;
+        }
+
+        #api p, #api .intro p {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 24px;
+        }
+
+        /* Form Grupları ve Giriş Alanları (Email, Şifre) */
+        #api .entry-item {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        #api label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            color: #4a4a4a;
+            margin-bottom: 6px;
+        }
+
+        #api input[type="text"], 
+        #api input[type="email"], 
+        #api input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccd0d5;
+            border-radius: 6px;
+            font-size: 15px;
+            box-sizing: border-box;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        #api input:focus {
+            outline: none;
+            border-color: #0066cc;
+            box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.15);
+        }
+
+        /* Linkler (Şifremi Unuttum, Kayıt Ol) */
+        #api a {
+            color: #0066cc;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        #api a:hover {
+            text-decoration: underline;
+        }
+
+        /* Şifremi unuttum linkini sağa yaslamak için */
+        #api .forgotPassword {
+            float: right;
+            margin-top: -38px;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Butonlar (Sign In / Giriş Yap) */
+        #api button, #api .buttons #next {
+            width: 100%;
+            padding: 14px;
+            background-color: #0066cc;
+            color: #ffffff;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            margin-top: 15px;
+        }
+
+        #api button:hover, #api .buttons #next:hover {
+            background-color: #0052a3;
+        }
+
+        /* 'OR' (VEYA) Bölümü */
+        #api .divider {
+            text-align: center;
+            margin: 25px 0;
+            position: relative;
+        }
+
+        #api .divider::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: #e0e0e0;
+            z-index: 1;
+        }
+
+        #api .divider h2 {
+            background: #ffffff;
+            display: inline-block;
+            padding: 0 15px;
+            font-size: 14px;
+            color: #8c8c8c;
+            position: relative;
+            z-index: 2;
+            margin: 0;
+        }
+
+        /* Hesabınız yok mu? Kayıt olun kısmı */
+        #api .create {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+            color: #666;
+        }
+    </style>
 </head>
 <body>
+    <!-- Azure B2C formu buraya enjekte edip yukarıdaki CSS kurallarıyla süsleyecek -->
     <div id="api"></div>
 </body>
 </html>
