@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Product Brand Name</title>
+    <title>DFDS Login</title>
     <style>
-        /* Genel Sayfa Ayarları */
+        /* Genel Sayfa Yapısı */
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #f0f2f5;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background-color: #f4f7f9;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -17,142 +17,167 @@
             padding: 0;
         }
 
-        /* Azure B2C'nin enjekte ettiği ana kapsayıcıyı ortalıyoruz */
+        /* Kurumsal Giriş Kutusu */
         #api {
             background: #ffffff;
             padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            border-radius: 4px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
             width: 100%;
-            max-width: 400px;
+            max-width: 440px;
             box-sizing: border-box;
         }
 
-        /* Başlıklar */
-        #api h2, #api .heading h2 {
-            font-size: 24px;
-            font-weight: 600;
-            color: #1a1a1a;
-            margin-top: 0;
-            margin-bottom: 8px;
+        /* DFDS Logo Alanı için Yer Tutucu (İsterseniz sayfa üstüne de <img src="..."> koyabilirsiniz) */
+        #api::before {
+            content: "";
+            display: block;
+            width: 100px;
+            height: 40px;
+            margin: 0 auto 30px auto;
+            background: url('https://wikimedia.org') no-repeat center;
+            background-size: contain;
         }
 
-        #api p, #api .intro p {
-            color: #666;
-            font-size: 14px;
+        /* Başlık stili */
+        #api h2, #api .heading h2 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #00263e;
+            margin-top: 0;
             margin-bottom: 24px;
         }
 
-        /* Form Grupları ve Giriş Alanları (Email, Şifre) */
+        /* Bilgilendirme Metinleri */
+        #api p, #api .intro p {
+            display: none; /* Sade kurumsal görünüm için Azure'un ekstra yazılarını gizliyoruz */
+        }
+
+        /* Form Elemanları Gruplaması */
         #api .entry-item {
-            margin-bottom: 20px;
+            margin-bottom: 18px;
             position: relative;
         }
 
         #api label {
             display: block;
             font-size: 14px;
-            font-weight: 500;
-            color: #4a4a4a;
+            font-weight: 600;
+            color: #00263e;
             margin-bottom: 6px;
         }
 
+        /* Input Giriş Kutuları (DFDS Tarzı) */
         #api input[type="text"], 
         #api input[type="email"], 
         #api input[type="password"] {
             width: 100%;
             padding: 12px;
-            border: 1px solid #ccd0d5;
-            border-radius: 6px;
-            font-size: 15px;
+            border: 1px solid #b1c4d1;
+            border-radius: 2px;
+            font-size: 14px;
+            background-color: #ecf2f9;
+            color: #00263e;
             box-sizing: border-box;
-            transition: border-color 0.2s, box-shadow 0.2s;
+            transition: all 0.2s ease;
         }
 
         #api input:focus {
             outline: none;
-            border-color: #0066cc;
-            box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.15);
+            border-color: #4ba3e3;
+            background-color: #ffffff;
+            box-shadow: 0 0 0 2px rgba(75, 163, 227, 0.2);
         }
 
-        /* Linkler (Şifremi Unuttum, Kayıt Ol) */
+        /* Şifre Göz İkonunun Kutunun İçinde Kalması İçin */
+        #api .password-label {
+            position: relative;
+        }
+
+        #api .showHide {
+            position: absolute;
+            right: 12px;
+            top: 38px;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        /* Linkler (Forgot password?) metni */
         #api a {
-            color: #0066cc;
+            color: #4ba3e3;
             text-decoration: none;
             font-size: 14px;
+            font-weight: 600;
         }
 
         #api a:hover {
             text-decoration: underline;
         }
 
-        /* Şifremi unuttum linkini sağa yaslamak için */
+        /* Şifremi Unuttum Konumu */
         #api .forgotPassword {
-            float: right;
-            margin-top: -38px;
-            position: relative;
-            z-index: 10;
+            display: block;
+            margin-top: 6px;
+            margin-bottom: 20px;
         }
 
-        /* Butonlar (Sign In / Giriş Yap) */
-        #api button, #api .buttons #next {
+        /* DFDS Turuncu Giriş Yap Butonu */
+        #api button#next, #api .buttons #next {
             width: 100%;
             padding: 14px;
-            background-color: #0066cc;
+            background-color: #ed8b00;
             color: #ffffff;
             border: none;
-            border-radius: 6px;
-            font-size: 16px;
-            font-weight: 600;
+            border-radius: 2px;
+            font-size: 15px;
+            font-weight: 700;
             cursor: pointer;
-            transition: background-color 0.2s;
-            margin-top: 15px;
+            transition: background-color 0.2s ease;
+            text-transform: capitalize;
         }
 
-        #api button:hover, #api .buttons #next:hover {
-            background-color: #0052a3;
+        #api button#next:hover, #api .buttons #next:hover {
+            background-color: #d67d00;
         }
 
-        /* 'OR' (VEYA) Bölümü */
+        /* Azure'un varsayılan "OR" çizgisini gizliyoruz */
         #api .divider {
-            text-align: center;
-            margin: 25px 0;
-            position: relative;
+            display: none;
         }
 
-        #api .divider::before {
-            content: "";
-            position: absolute;
-            top: 50%;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: #e0e0e0;
-            z-index: 1;
-        }
-
-        #api .divider h2 {
-            background: #ffffff;
-            display: inline-block;
-            padding: 0 15px;
-            font-size: 14px;
-            color: #8c8c8c;
-            position: relative;
-            z-index: 2;
-            margin: 0;
-        }
-
-        /* Hesabınız yok mu? Kayıt olun kısmı */
+        /* Create Account (Yeni Hesap Oluştur) Buton Tasarımı */
         #api .create {
+            margin-top: 12px;
             text-align: center;
-            margin-top: 20px;
+        }
+
+        #api .create p {
+            display: block;
+            font-size: 0; /* İçindeki ham metni temizlemek için */
+        }
+
+        #api .create a {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #4ba3e3;
+            color: #4ba3e3;
+            background-color: #ffffff;
+            border-radius: 2px;
             font-size: 14px;
-            color: #666;
+            font-weight: 700;
+            text-align: center;
+            box-sizing: border-box;
+            transition: all 0.2s ease;
+        }
+
+        #api .create a:hover {
+            background-color: rgba(75, 163, 227, 0.05);
+            text-decoration: none;
         }
     </style>
 </head>
 <body>
-    <!-- Azure B2C formu buraya enjekte edip yukarıdaki CSS kurallarıyla süsleyecek -->
     <div id="api"></div>
 </body>
 </html>
