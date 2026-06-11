@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DFDS - Password Reset</title>
+    <style>
+        /* Genel Sayfa Yapısı */
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background-color: #f4f7f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        /* Kurumsal Şifre Sıfırlama Kutusu */
+        #api {
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 4px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            width: 100%;
+            max-width: 440px;
+            box-sizing: border-box;
+        }
+
+        /* Resmi DFDS Logo Alanı */
+        #api::before {
+            content: "";
+            display: block;
+            width: 140px;
+            height: 50px;
+            margin: 0 auto 30px auto;
+            background: url('https://ctfassets.net') no-repeat center;
+            background-size: contain;
+        }
+
+        /* İstenmeyen Başlıkları ve Açıklamaları Gizliyoruz */
+        #api .heading,
+        #api .heading h1,
+        #api .intro,
+        #api .intro h2,
+        #api .divider,
+        .companyName {
+            display: none !important;
+            visibility: hidden !important;
+            height: 0 !important;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+
+        /* Form Elemanları Gruplaması */
+        #api .entry-item, #api .attrEntry {
+            margin-bottom: 18px;
+            position: relative;
+        }
+
+        #api label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: #00263e;
+            margin-bottom: 6px;
+        }
+
+        /* Input Giriş Kutuları */
+        #api input[type="text"], 
+        #api input[type="email"], 
+        #api input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #b1c4d1;
+            border-radius: 2px;
+            font-size: 14px;
+            background-color: #ffffff;
+            color: #00263e;
+            box-sizing: border-box;
+            transition: all 0.2s ease;
+        }
+
+        #api input:focus {
+            outline: none;
+            border-color: #4ba3e3;
+            box-shadow: 0 0 0 2px rgba(75, 163, 227, 0.2);
+        }
+
+        /* Giriş kutularının altındaki mavi "What is this?" yazılarını temizler */
+        #api .helpLink, #api .helpIcon {
+            display: none !important;
+        }
+
+        /* Buton Grupları Alanı */
+        #api .buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 25px;
+        }
+
+        /* DFDS Turuncu Ana Butonlar (Continue, Verify Code vb.) */
+        #api button#next, #api button#continue, #api .buttons #next, #api button.verify {
+            width: 100%;
+            padding: 14px;
+            background-color: #ed8b00;
+            color: #ffffff;
+            border: none;
+            border-radius: 2px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            order: 1; /* Ana buton her zaman üstte dursun */
+        }
+
+        #api button#next:hover, #api button#continue:hover, #api button.verify:hover {
+            background-color: #d67d00;
+        }
+
+        /* "Cancel" (İptal) veya "Geri" Buton Tasarımı */
+        #api button#cancel {
+            width: 100%;
+            padding: 12px;
+            background-color: #ffffff;
+            color: #5f7585;
+            border: 1px solid #b1c4d1;
+            border-radius: 2px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            order: 2; /* Alt satıra indirir */
+        }
+
+        #api button#cancel:hover {
+            background-color: #f4f7f9;
+            color: #00263e;
+        }
+
+        /* B2C'nin "Send Code" / "Resend Code" (Kod Gönder) Butonları */
+        #api button.sendCode, #api button#email_ver_btn_send {
+            width: 100%;
+            padding: 12px;
+            background-color: #ffffff;
+            color: #4ba3e3;
+            border: 1px solid #4ba3e3;
+            border-radius: 2px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-bottom: 10px;
+        }
+
+        #api button.sendCode:hover, #api button#email_ver_btn_send:hover {
+            background-color: rgba(75, 163, 227, 0.05);
+        }
+
+        /* Doğrulama (Hata/Başarı) Mesajları Tasarımı - DFDS Standartları */
+        #api .error.pageLevel, #api .errorText {
+            color: #d9381e !important;
+            font-size: 13px !important;
+            font-weight: 600 !important;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        #api .verificationSuccess {
+            color: #2e7d32 !important;
+            font-size: 13px !important;
+            font-weight: 600 !important;
+        }
+    </style>
+</head>
+<body>
+    <div id="api"></div>
+</body>
+</html>
