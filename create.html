@@ -23,6 +23,8 @@
 }
 /* dfdsUserId etiketini ve giriş kutusunu kullanıcıdan tamamen gizler */
 /* dfdsUserId alanını DOM'da aktif tutup görsel olarak tamamen görünmez yapıyoruz */
+/* dfdsUserId alanının liste kapsayıcısını (li) ve alt elemanlarını DOM'da aktif tutup tamamen gizler */
+#api li.extension_dfdsUserId_li,
 #api .entry-item:has(input#extension_dfdsUserId),
 #api .attrEntry:has(input#extension_dfdsUserId),
 #api label[for="extension_dfdsUserId"],
@@ -35,7 +37,9 @@
     height: 0 !important;
     margin: 0 !important;
     padding: 0 !important;
+    list-style-type: none !important; /* Mermi imini kesin olarak öldürür */
 }
+
 
 /* Giriş kutularının altındaki mavi "What is this?" yazılarını temizler */
  #api .helpLink, #api .helpIcon {
