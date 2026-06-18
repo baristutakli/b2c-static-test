@@ -5,6 +5,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DFDS Authentication</title>
     <style>
+        /* ========================================== */
+        /* 1. TÜM B2C ÇÖPLERİNİ KÖKTEN GİZLEYEN SİHİRLİ BÖLÜM */
+        /* ========================================== */
+        
+        /* Başlıklar, Açıklamalar ve Şirket İsimlerini Temizler */
+        #api .heading, 
+        #api .heading h1, 
+        #api .intro, 
+        #api .intro h2, 
+        #api .divider, 
+        .companyName,
+        /* "What is this?" Yazılarını ve İkonlarını Gizler */
+        #api .helpLink, 
+        #api .helpIcon,
+        /* dfdsUserId alanını, etiketini ve o can sıkan noktayı (li mermi imini) kullanıcıdan tamamen yok eder */
+        #api li:has(input#extension_dfdsUserId),
+        #api li.extension_dfdsUserId_li,
+        #api .entry-item:has(input#extension_dfdsUserId),
+        #api .attrEntry:has(input#extension_dfdsUserId),
+        #api label[for="extension_dfdsUserId"],
+        #api input#extension_dfdsUserId {
+            display: none !important;
+            visibility: hidden !important;
+            height: 0 !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            opacity: 0 !important;
+            pointer-events: none !important;
+            list-style: none !important;
+            list-style-type: none !important;
+        }
+
+        /* ========================================== */
+        /* 2. KURUMSAL DFDS TASARIM VE STİL BÖLÜMÜ */
+        /* ========================================== */
+        
         /* Genel Sayfa Yapısı */
         body {
             font-family: 'Segoe UI', Arial, sans-serif;
@@ -38,6 +74,14 @@
             margin: 0 auto 30px auto;
             background: url('https://ctfassets.net') no-repeat center;
             background-size: contain;
+        }
+
+        /* Form Liste Yapısı Noktalarını Kaldırma */
+        #api ul, #api li {
+            list-style: none !important;
+            list-style-type: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
         }
 
         /* Form Elemanları Gruplaması */
@@ -83,24 +127,6 @@
             top: 38px;
             cursor: pointer;
             z-index: 10;
-        }
-
-        /* Linkler (Forgot password?) metni */
-        #api a {
-            color: #4ba3e3;
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 600;
-        }
-
-        #api a:hover {
-            text-decoration: underline;
-        }
-
-        #api .forgotPassword {
-            display: block;
-            margin-top: 6px;
-            margin-bottom: 20px;
         }
 
         /* Buton Alanı Yapılandırması */
@@ -150,36 +176,6 @@
             color: #00263e;
         }
 
-        /* Create Account Alanı */
-        #api .create {
-            margin-top: 12px;
-            text-align: center;
-        }
-
-        #api .create p {
-            display: none !important; /* Düz yazıyı gizle */
-        }
-
-        #api .create a {
-            display: block;
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #4ba3e3;
-            color: #4ba3e3;
-            background-color: #ffffff;
-            border-radius: 2px;
-            font-size: 14px;
-            font-weight: 700;
-            text-align: center;
-            box-sizing: border-box;
-            transition: all 0.2s ease;
-        }
-
-        #api .create a:hover {
-            background-color: rgba(75, 163, 227, 0.05);
-            text-decoration: none;
-        }
-
         /* Doğrulama (Hata) Mesajları Tasarımı */
         #api .error.pageLevel, #api .errorText {
             color: #d9381e !important;
@@ -193,43 +189,5 @@
 </head>
 <body>
     <div id="api"></div>
-
-    <script>
-        // Azure B2C HTML içeriğini yükledikten sonra çalışacak mutation observer / interval mekanizması
-        var checkExist = setInterval(function() {
-            var userIdInput = document.getElementById('extension_dfdsUserId');
-            var apiDiv = document.getElementById('api');
-            
-            if (userIdInput || apiDiv) {
-                clearInterval(checkExist);
-                cleanB2CDOM();
-            }
-        }, 50);
-
-        function cleanB2CDOM() {
-            // 1. Adım: İstenmeyen kurumsal başlıkları ve boşlukları DOM'dan tamamen siliyoruz
-            var trashSelectors = ['.heading', '.intro', '.divider', '.companyName', '.helpLink', '.helpIcon'];
-            trashSelectors.forEach(function(selector) {
-                var elements = document.querySelectorAll('#api ' + selector);
-                elements.forEach(function(el) { el.remove(); });
-            });
-
-            // 2. Adım: dfdsUserId input alanını koruyarak sarmalayıcı olan çirkin noktalı <li> elemanını siliyoruz
-            var targetInput = document.getElementById('extension_dfdsUserId');
-            if (targetInput) {
-                // İnput'u tamamen görünmez bir form elemanına (hidden) çeviriyoruz
-                targetInput.type = 'hidden';
-                
-                // İnput'u formun en dış katmanına (#api içine) taşıyarak güvene alıyoruz (böylece post edilecek)
-                document.getElementById('api').appendChild(targetInput);
-                
-                // O noktayı içeren eski <li> kapsayıcısını bulup tamamen uçuruyoruz
-                var liContainer = document.querySelector('li.extension_dfdsUserId_li');
-                if (liContainer) {
-                    liContainer.remove();
-                }
-            }
-        }
-    </script>
 </body>
 </html>
