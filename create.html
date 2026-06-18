@@ -17,44 +17,7 @@
             padding: 20px;
             box-sizing: border-box;
         }
-/* Giriş kutularının altındaki "What is this?" linklerini gizler */
- #api .helpLink, #api .helpIcon {
-    display: none !important;
-}
-/* dfdsUserId etiketini ve giriş kutusunu kullanıcıdan tamamen gizler */
-/* dfdsUserId alanını DOM'da aktif tutup görsel olarak tamamen görünmez yapıyoruz */
-/* dfdsUserId alanının liste kapsayıcısını (li) ve alt elemanlarını DOM'da aktif tutup tamamen gizler */
-#api li.extension_dfdsUserId_li,
-#api .entry-item:has(input#extension_dfdsUserId),
-#api .attrEntry:has(input#extension_dfdsUserId),
-#api label[for="extension_dfdsUserId"],
-#api input#extension_dfdsUserId {
-    position: absolute !important;
-    left: -9999px !important;
-    top: -9999px !important;
-    opacity: 0 !important;
-    pointer-events: none !important;
-    height: 0 !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    list-style-type: none !important; /* Mermi imini kesin olarak öldürür */
-}
 
-
-/* Giriş kutularının altındaki mavi "What is this?" yazılarını temizler */
- #api .helpLink, #api .helpIcon {
-    display: none !important;
-}
-
-/* Giriş kutularının altındaki mavi "What is this?" yazılarını temizler */
-#api .helpLink, #api .helpIcon {
-    display: none !important;
-}
-
-/* Giriş kutularının altındaki mavi "What is this?" yazılarını temizler */
-#api .helpLink, #api .helpIcon {
-    display: none !important;
-}
         /* Kurumsal Giriş/Kayıt Kutusu */
         #api {
             background: #ffffff;
@@ -77,21 +40,7 @@
             background-size: contain;
         }
 
-        /* İstenmeyen Başlıkları ve Boşlukları Gizliyoruz */
-       #api .heading,
-        #api .heading h1,
-        #api .intro,
-        #api .intro h2,
-        #api .divider,
-        .companyName {
-            display: none !important;
-            visibility: hidden !important;
-            height: 0 !important;
-            margin: 0 !important;
-            padding: 0 !important;
-        }
-
-        /* Form Elemanları Gruplaması (Kayıt alanındaki tüm input satırları) */
+        /* Form Elemanları Gruplaması */
         #api .entry-item, #api .attrEntry {
             margin-bottom: 18px;
             position: relative;
@@ -154,7 +103,7 @@
             margin-bottom: 20px;
         }
 
-        /* BUTON ALANI YAPILANDIRMASI (Kayıt sayfasındaki yan yana veya alt alta butonlar için) */
+        /* Buton Alanı Yapılandırması */
         #api .buttons {
             display: flex;
             flex-direction: column;
@@ -162,7 +111,7 @@
             margin-top: 20px;
         }
 
-        /* DFDS Turuncu Ana Butonlar (Sign In, Create/Continue) */
+        /* DFDS Turuncu Ana Butonlar */
         #api button#next, #api button#continue, #api .buttons #next {
             width: 100%;
             padding: 14px;
@@ -174,14 +123,14 @@
             font-weight: 700;
             cursor: pointer;
             transition: background-color 0.2s ease;
-            order: 1; /* Her zaman en üstte dursun */
+            order: 1;
         }
 
         #api button#next:hover, #api button#continue:hover {
             background-color: #d67d00;
         }
 
-        /* YENİ: Kayıt sayfasındaki "Cancel" (İptal) Butonu Tasarımı */
+        /* Cancel Butonu Tasarımı */
         #api button#cancel {
             width: 100%;
             padding: 12px;
@@ -193,7 +142,7 @@
             font-weight: 600;
             cursor: pointer;
             transition: all 0.2s ease;
-            order: 2; /* İptal butonu alt satıra insin */
+            order: 2;
         }
 
         #api button#cancel:hover {
@@ -201,17 +150,14 @@
             color: #00263e;
         }
 
-        /* Create Account / Sign up now Kısmı (Giriş sayfasındayken görünür) */
+        /* Create Account Alanı */
         #api .create {
             margin-top: 12px;
             text-align: center;
         }
 
         #api .create p {
-            display: block;
-            font-size: 0;
-            margin: 0;
-            padding: 0;
+            display: none !important; /* Düz yazıyı gizle */
         }
 
         #api .create a {
@@ -234,7 +180,7 @@
             text-decoration: none;
         }
 
-        /* Doğrulama (Hata) Mesajları Tasarımı - DFDS Kırmızısı */
+        /* Doğrulama (Hata) Mesajları Tasarımı */
         #api .error.pageLevel, #api .errorText {
             color: #d9381e !important;
             font-size: 13px !important;
@@ -247,5 +193,43 @@
 </head>
 <body>
     <div id="api"></div>
+
+    <script>
+        // Azure B2C HTML içeriğini yükledikten sonra çalışacak mutation observer / interval mekanizması
+        var checkExist = setInterval(function() {
+            var userIdInput = document.getElementById('extension_dfdsUserId');
+            var apiDiv = document.getElementById('api');
+            
+            if (userIdInput || apiDiv) {
+                clearInterval(checkExist);
+                cleanB2CDOM();
+            }
+        }, 50);
+
+        function cleanB2CDOM() {
+            // 1. Adım: İstenmeyen kurumsal başlıkları ve boşlukları DOM'dan tamamen siliyoruz
+            var trashSelectors = ['.heading', '.intro', '.divider', '.companyName', '.helpLink', '.helpIcon'];
+            trashSelectors.forEach(function(selector) {
+                var elements = document.querySelectorAll('#api ' + selector);
+                elements.forEach(function(el) { el.remove(); });
+            });
+
+            // 2. Adım: dfdsUserId input alanını koruyarak sarmalayıcı olan çirkin noktalı <li> elemanını siliyoruz
+            var targetInput = document.getElementById('extension_dfdsUserId');
+            if (targetInput) {
+                // İnput'u tamamen görünmez bir form elemanına (hidden) çeviriyoruz
+                targetInput.type = 'hidden';
+                
+                // İnput'u formun en dış katmanına (#api içine) taşıyarak güvene alıyoruz (böylece post edilecek)
+                document.getElementById('api').appendChild(targetInput);
+                
+                // O noktayı içeren eski <li> kapsayıcısını bulup tamamen uçuruyoruz
+                var liContainer = document.querySelector('li.extension_dfdsUserId_li');
+                if (liContainer) {
+                    liContainer.remove();
+                }
+            }
+        }
+    </script>
 </body>
 </html>
